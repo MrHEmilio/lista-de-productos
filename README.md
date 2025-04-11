@@ -19,13 +19,13 @@ Este proyecto consiste en una página web que consume datos de la API de [FakeSt
 A continuación se mostrarán capturas del funcionamiento del proyecto:
 
 1. **Vista general de la página al cargar**
-   ![Vista general](AQUÍ_IRÁ_EL_LINK_1)
+   ![Vista general](https://raw.githubusercontent.com/MrHEmilio/lista-de-productos/refs/heads/main/imágenes/landing-page.png)
 
 2. **Funcionamiento del carrusel**
-   ![Carrusel activo](AQUÍ_IRÁ_EL_LINK_2)
+   ![Carrusel activo](https://raw.githubusercontent.com/MrHEmilio/lista-de-productos/refs/heads/main/imágenes/carrusel.png)
 
 3. **Despliegue del modal**
-   ![Modal activo](AQUÍ_IRÁ_EL_LINK_3)
+   ![Modal activo](https://raw.githubusercontent.com/MrHEmilio/lista-de-productos/refs/heads/main/imágenes/modal.png)
 
 _Reemplaza los enlaces anteriores con las URLs de tus imágenes._
 
