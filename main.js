@@ -1,25 +1,61 @@
 const main = document.getElementById("mainWithId");
 const URLMain = "https://fakestoreapi.com/products/";
+const URLProducts = "https://fakestoreapi.com/products/categories/";
 const carrusel = document.getElementById("dentroDelCarrusel");
+const ulMenu = document.getElementById("ulMenu");
 
-
-function getData(){
-    fetch(URLMain)
+// function getData(cat){
+//     fetch(URLMain+cat)
+//     .then((response)=>{
+//         console.log(response);
+//         response.json().then((res)=>{
+//             // console.log(res.length);
+//             // console.log(res[19]);
+//             createCards(res);
+          
+//         })
+//     })
+//     .catch((err)=>{
+//         main.insertAdjacentHTML("afterend", `<div class="alert alert-danger" role="alert">
+//   ${err.message}
+// </div>`);
+//     });
+// }
+function getData(cat){
+    let url = cat ? `${URLMain}category/${cat}` : URLMain;
+    fetch(url)
     .then((response)=>{
-        console.log(response);
-        response.json().then((res)=>{
-            // console.log(res.length);
-            // console.log(res[19]);
-            createCards(res);
-        })
+        return response.json();
+    })
+    .then((res)=>{
+        createCards(res);
     })
     .catch((err)=>{
-        main.insertAdjacentHTML("beforeend", `<div class="alert alert-danger" role="alert">
-  ${err.message}
-</div>`);
+        main.insertAdjacentHTML("afterend", `<div class="alert alert-danger" role="alert">
+        ${err.message}
+        </div>`);
     });
 }
-
+function getCategories(){
+  fetch(URLProducts)
+  .then((response)=>{
+      response.json().then((res)=>{
+          // console.log(res.length);
+          // console.log(res[19]);
+          // createCategories(res);
+          res.forEach((cat)=>{
+            ulMenu.insertAdjacentHTML("afterbegin",
+               `<li><a class="dropdown-item" href="#" onclick="getData('${cat}')">${cat}</a></li>`);
+          });
+        
+      });
+  })
+  .catch((err)=>{
+      main.insertAdjacentHTML("beforeend", `<div class="alert alert-danger" role="alert">
+${err.message}
+</div>`);
+  });
+}
 // function createCards(prods){
 //     prods.forEach (prod =>{
 //         carrusel.insertAdjacentHTML("beforeend", `<div class="card mb-3" style="max-width: 540px;">
@@ -40,6 +76,7 @@ function getData(){
 // }
 
 function createCards(prods){
+    carrusel.innerHTML = "";
     prods.forEach((prod, index) => {
         carrusel.insertAdjacentHTML("beforeend", `
         <div class="carousel-item ${index == 0 ? "active" : ""}">
@@ -67,7 +104,7 @@ function createCards(prods){
                                 <div class="modal-body">
                                 ${prod.description}
                                 </div>
-                                <div class="categoryOfTheProduct" style="margin-left: 5px;">Category: <strong>${prod.category}</strong></div>
+                                <div class="categoryOfTheProduct" style="margin-left: 5px;"><strong>${prod.category}</strong></div>
                                 <div class="modal-footer">
                                     <!--- <div class="categoryOfTheProduct" style="margin-left: 5px;">Category: <strong>${prod.category}</strong></div> --->
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -85,4 +122,5 @@ function createCards(prods){
 }
 
 
-getData();
+getData("");
+getCategories();
